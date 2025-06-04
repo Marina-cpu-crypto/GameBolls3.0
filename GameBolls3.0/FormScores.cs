@@ -19,7 +19,7 @@ namespace GameBolls3._0
             InitializeComponent();
         }
 
-        static string result (int rightSteps, int currentSteps)
+        static string result (int rightSteps, int currentSteps)//Сравнение шагов пользователя с заданными для каждого уровня
         {
             if (Convert.ToInt32(currentSteps) >  rightSteps) return "Mожно лучше";
             else
@@ -28,17 +28,17 @@ namespace GameBolls3._0
                 else return "Переиграл и уничтожил";
             }
         }
-        private void FormScores_Load(object sender, EventArgs e)
+        private void FormScores_Load(object sender, EventArgs e)//Открытие таблицы результатов
         {
-            StreamReader sr = new StreamReader("GameResults.txt");
-            try
+            StreamReader sr = new StreamReader("GameResults.txt");//Открытие файла с номером уровня и так далее
+            try//Если там что-то вообще будет
             {
                 for (int i = 0; i < 20; i++)
                 {
-                    string[] temp = sr.ReadLine().Split('#');
+                    string[] temp = sr.ReadLine().Split('#');//Считываем данные
                     string res = "";
                     int currentSteps = Convert.ToInt32(temp[2]);
-                    switch (temp[0])
+                    switch (temp[0])//вынос вердикта
                     {
                         case "1": res = result(6, currentSteps); break;
 
@@ -47,11 +47,11 @@ namespace GameBolls3._0
                         case "3": res = result(21, currentSteps); break;
 
                     }
-                    ListViewItem item = new ListViewItem(new string[] { temp[0], temp[1], temp[2], res });
+                    ListViewItem item = new ListViewItem(new string[] { temp[0], temp[1], temp[2], res });//Запись всего этого в таблицу результатов
                     listViewScores.Items.Add(item);
                 }
             }
-            catch { sr.Close(); }
+            catch { sr.Close(); } // если нет, то закрываем
             sr.Close();
         }
     }

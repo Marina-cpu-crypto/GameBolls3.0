@@ -68,22 +68,24 @@ namespace GameBolls3._0
         }
         public void BollColour(string[,] GameField, string level)
         {
-            for (int i = 4; i > 0; i--) { for (int j = 2; j < 15; j += 4) { GameField[i, j] = "N"; } }
+            
+            
+            for (int i = 4; i > 0; i--) { for (int j = 2; j < 15; j += 4) { GameField[i, j] = "N"; } }//Для начала забиваем всю матрицу пустыми значениями
             Random rnd = new Random();
             if (level == "1")
             {
-                List<string> list = new List<string> { "R", "R", "R", "O", "O", "O", "N", "N", "N" }; 
+                List<string> list = new List<string> { "R", "R", "R", "O", "O", "O", "N", "N", "N" }; //Создаём список значений ячеек
 
                 for (int i = 4; i > 1; i--)
                 {
                     for (int j = 2; j < 11; j += 4)
                     {
                         int n = rnd.Next(list.Count);
-                        GameField[i, j] = list[n];
-                        list.RemoveAt(n);
-                        bool onecase = (GameField[i - 1, j] == "R" || GameField[i - 1, j] == "O") && GameField[i, j] == "N";
-                        bool twocase = i <= 3 && (GameField[i, j] == "R" || GameField[i, j] == "O") && GameField[i + 1, j] == "N";
-                        while (onecase || twocase)
+                        GameField[i, j] = list[n];//Ставим в матрицу случайный эл-т из этого списка
+                        list.RemoveAt(n);//Удаляем его
+                        bool onecase = (GameField[i - 1, j] == "R" || GameField[i - 1, j] == "O") && GameField[i, j] == "N";//Первый случай - если текущая ячейка пуста, а над ней в ячейке есть шарик
+                        bool twocase = i <= 3 && (GameField[i, j] == "R" || GameField[i, j] == "O") && GameField[i + 1, j] == "N";//Второй случай - если текущая ячейка заполнена, а под ней пуста
+                        while (onecase || twocase) // В этих двух случаях опускаем шарик
                         {
                             if (onecase)
                             {
@@ -101,7 +103,8 @@ namespace GameBolls3._0
                         }
                     }
                 }
-                for (int j = 2; j < 11; j += 4)
+                //Костыльное исправление ошибки, когда один шарик наверху, а внизу две ячейки пусты, то он опускается только на одну позицию и не доходит до дна
+                for (int j = 2; j < 11; j += 4)//Опускаем его на дно в таком случае
                 {
                     int i = 3;
                     if ((GameField[i, j] == "R" || GameField[i, j] == "O") && GameField[i + 1, j] == "N" && GameField[i - 1, j] == "N")

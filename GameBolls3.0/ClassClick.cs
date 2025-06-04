@@ -10,7 +10,7 @@ namespace GameBolls3._0
 {
     class ClassClick
     {
-        public Image ImgRedBall, ImgOrangeBall, ImgEmpty, ImgBlueBall;
+        /*public*/ Image ImgRedBall, ImgOrangeBall, ImgEmpty, ImgBlueBall;
         //public string level;
         public ClassClick()
         {
@@ -48,7 +48,7 @@ namespace GameBolls3._0
         }
         public bool IsNoCurrentBall(string[,] gameField, string level)
         {
-            int n = 8;
+            int n = 8;//Номер столбца для хранения выбранного мяча в матрице уровней 2 и 3
             if (level == "1") n = 6;
             if (gameField[0, n] == "N") return true;
             else return false;
@@ -57,17 +57,17 @@ namespace GameBolls3._0
         {
             int n = 2;
             if (level == "3") n = 1;
-            if (gameField[row - 1, column] == "N" || row == n) return true;
+            if (gameField[row - 1, column] == "N" || row == n) return true;//Если над шариком пусто или шарик на самом верху колбы
             else return false;
         }
         public void CooseBall(string level, DataGridView grid, string[,] gameField, int row, int column)
         {
             int n = 8;
             if (level == "1") n = 6;
-            string letter = gameField[row, column];
-            gameField[0, n] = gameField[row, column];
-            gameField[row, column] = "N";
-            switch (letter)
+            string letter = gameField[row, column];//Переменная для хранения тыкнутой буквы
+            gameField[0, n] = gameField[row, column];//Присваеваем эту букву на ячейку временного хранения
+            gameField[row, column] = "N";//На месте этой буквы пустота
+            switch (letter)//Отрисовка на поле на основе матрицы
             {
                 case "R":
                     grid.Rows[row].Cells[column].Value = ImgEmpty;

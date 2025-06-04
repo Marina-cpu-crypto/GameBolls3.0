@@ -20,8 +20,8 @@ namespace GameBolls3._0
         private void buttonLevel1_Click(object sender, EventArgs e)
         {
             FormLevels frm = new FormLevels();
-            frm.claslevel = "1";
-            frm.ShowDialog();
+            frm.claslevel = "1";// Изменение переменной, которая принадлежит форме формлевел
+            frm.ShowDialog();//Открытие формы поля игры для диалога
             
         }
 

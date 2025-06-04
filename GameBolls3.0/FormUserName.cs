@@ -19,13 +19,14 @@ namespace GameBolls3._0
         {
             InitializeComponent();
         }
-        private void buttonEnter_Click(object sender, EventArgs e)
+        private void buttonEnter_Click(object sender, EventArgs e)//Кнопка подтверждения имени
         {
+            //открываем файл, записываем в него 
             StreamWriter sw = new StreamWriter("GameResults.txt", true);
             string userName = textBoxUserName.Text;
-            sw.WriteLine(level + "#" + userName + "#"+ steps);
-            sw.Close();
-            this.Close();
+            sw.WriteLine(level + "#" + userName + "#"+ steps);// Уровень, имя и шаги
+            sw.Close();// закрываем файл
+            this.Close();//закрываем форму
         }
     }
 }
