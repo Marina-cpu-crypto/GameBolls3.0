@@ -13,7 +13,6 @@ namespace GameBolls3._0
 {
     public partial class FormScores : Form
     {
-       //public int length;
         public FormScores()
         {
             InitializeComponent();
